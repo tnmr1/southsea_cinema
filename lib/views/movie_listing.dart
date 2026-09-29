@@ -35,6 +35,7 @@ class MovieListing extends StatelessWidget {
             // ADDED: Space between the title and description
             SizedBox(height: 12),
 
+            // ADDED: Short movie description
             Text(
               'Batman faces a dangerous criminal mastermind who throws Gotham City into chaos.',
             ),
@@ -43,4 +44,4 @@ class MovieListing extends StatelessWidget {
       ),
     );
   }
-}// ADDED: Short movie description
+}
