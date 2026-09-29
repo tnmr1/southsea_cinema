@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
-
-// CHANGED: StatefulWidget because ticket quantity can change
+// changed: StatefulWidget because ticket quanity can change
 class MovieListing extends StatefulWidget {
   const MovieListing({super.key});
-
   @override
   State<MovieListing> createState() => _MovieListingState();
 }
-
-// ADDED: State class stores changing data
+// added: state class stores chnging data
 class _MovieListingState extends State<MovieListing> {
-  // ADDED FOR EXERCISE 3: Current selected ticket quantity
+  // added for exercise 3: current selected ticket quanity
   int _ticketQuantity = 1;
-
-  // ADDED FOR EXERCISE 4: Feedback message shown after booking
+  // added for exercise 4: feedback mesage shown after booking
   String _feedbackMessage = '';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,30 +23,27 @@ class _MovieListingState extends State<MovieListing> {
         elevation: 0,
       ),
       drawer: const NavDrawer(),
-
-      // ADDED: Container to hold the movie listing content
+      // added: container to hold the movie listing content
       body: Container(
-        // CHANGED FOR EXERCISE 5: Use cinema background colour
+        // changed for ex5: use cinema background colour
         color: cinemaBackground,
-
-        // ADDED: Padding so the text is not touching the edge
+        // added: padding so the text isnt touching the edge
         padding: const EdgeInsets.all(16),
-
-        // ADDED FOR EXERCISE 6: LayoutBuilder checks available screen width
+        // added for ex6: LayoutBuilder checks avaliable screen width
         child: LayoutBuilder(
           builder: (context, constraints) {
-            // ADDED FOR EXERCISE 6: Wide screen layout
+            // added for exercise 6: wide screen layout
             if (constraints.maxWidth > 600) {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // ADDED FOR EXERCISE 6: Left side for movie information
+                  // added for exercise 6: left side for movie info
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // ADDED: Movie title
-                        // CHANGED FOR EXERCISE 5: Styled movie title
+                        // added: movie title
+                        // changed for exercise 5: styled movie title
                         const Text(
                           'The Dark Knight',
                           style: TextStyle(
@@ -60,24 +52,20 @@ class _MovieListingState extends State<MovieListing> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-
-                        // ADDED: Space between title and description
+                        // added: space between title and description
                         const SizedBox(height: 12),
-
-                        // ADDED: Short movie description
-                        // CHANGED FOR EXERCISE 5: Styled description
+                        // added: short movie description
+                        // changed for exercise 5: styled description
                         const Text(
                           'Batman faces a dangerous criminal mastermind who throws Gotham City into chaos.',
                           style: TextStyle(
                             color: cinemaFontMuted,
                           ),
                         ),
-
-                        // ADDED FOR EXERCISE 2: Space before movie details
+                        // added for exercise 2: space before movie details
                         const SizedBox(height: 16),
-
-                        // ADDED FOR EXERCISE 2: Row arranges movie details horizontally
-                        // CHANGED FOR EXERCISE 5: Styled movie details
+                        // added for exercise 2: row arranges movie details horizontaly
+                        // changed for exercise 5: styled movie details
                         const Row(
                           children: [
                             Text(
@@ -94,31 +82,27 @@ class _MovieListingState extends State<MovieListing> {
                       ],
                     ),
                   ),
-
-                  // ADDED FOR EXERCISE 6: Space between sections
+                  // added for exercise 6: space between sections
                   const SizedBox(width: 40),
-
-                  // ADDED FOR EXERCISE 6: Right side for booking controls
+                  // added for exercise 6: right side for booking controls
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // ADDED FOR EXERCISE 3: Ticket quantity dropdown
+                        // added for exercise 3: ticket quanity dropdown
                         DropdownMenu<int>(
                           initialSelection: 1,
-
-                          // ADDED: Runs when a quantity is selected
+                          // added: runs when a quanity is selected
                           onSelected: (int? value) {
-                            // ADDED: Check that a value was actually selected
+                            // added: check a value was actually selected
                             if (value != null) {
-                              // ADDED: Update state so Flutter rebuilds the screen
+                              // added: update state so Flutter rebuilds the screen
                               setState(() {
                                 _ticketQuantity = value;
                               });
                             }
                           },
-
-                          // ADDED: Ticket quantities from 1 to 5
+                          // added: ticket quantities from 1 to 5
                           dropdownMenuEntries: const [
                             DropdownMenuEntry(value: 1, label: '1'),
                             DropdownMenuEntry(value: 2, label: '2'),
@@ -127,23 +111,19 @@ class _MovieListingState extends State<MovieListing> {
                             DropdownMenuEntry(value: 5, label: '5'),
                           ],
                         ),
-
-                        // ADDED: Space before selected quantity text
+                        // added: space before selected quanity text
                         const SizedBox(height: 12),
-
-                        // ADDED: Shows the current selected quantity
-                        // CHANGED FOR EXERCISE 5: Styled selected quantity text
+                        // added: shows the current selected quanity
+                        // changed for exercise 5: styled selected quanity text
                         Text(
                           'Tickets selected: $_ticketQuantity',
                           style: const TextStyle(
                             color: cinemaFontWhite,
                           ),
                         ),
-
-                        // ADDED FOR EXERCISE 4: Space before booking button
+                        // added for exercise 4: space before booking button
                         const SizedBox(height: 16),
-
-                        // ADDED FOR EXERCISE 4: Add selected tickets to order
+                        // added for exercise 4: add selected tickets to order
                         ElevatedButton(
                           onPressed: () {
                             setState(() {
@@ -153,12 +133,10 @@ class _MovieListingState extends State<MovieListing> {
                           },
                           child: const Text('Add to order'),
                         ),
-
-                        // ADDED FOR EXERCISE 4: Space before feedback
+                        // added for exercise 4: space before feedback
                         const SizedBox(height: 12),
-
-                        // ADDED FOR EXERCISE 4: Visual feedback for the user
-                        // CHANGED FOR EXERCISE 5: Styled feedback message
+                        // added for exercise 4: visual feedbak for the user
+                        // changed for exercise 5: styled feedback mesage
                         Text(
                           _feedbackMessage,
                           style: const TextStyle(
@@ -171,13 +149,12 @@ class _MovieListingState extends State<MovieListing> {
                 ],
               );
             }
-
-            // ADDED FOR EXERCISE 6: Narrow/mobile screen layout
+            // added for exercise 6: narrow/mobile screen layout
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ADDED: Movie title
-                // CHANGED FOR EXERCISE 5: Styled movie title
+                // added: movie title
+                // changed for exercise 5: styled movie title
                 const Text(
                   'The Dark Knight',
                   style: TextStyle(
@@ -186,24 +163,20 @@ class _MovieListingState extends State<MovieListing> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-
-                // ADDED: Space between title and description
+                // added: space between title and description
                 const SizedBox(height: 12),
-
-                // ADDED: Short movie description
-                // CHANGED FOR EXERCISE 5: Styled description
+                // added: short movie description
+                // changed for exercise 5: styled description
                 const Text(
                   'Batman faces a dangerous criminal mastermind who throws Gotham City into chaos.',
                   style: TextStyle(
                     color: cinemaFontMuted,
                   ),
                 ),
-
-                // ADDED FOR EXERCISE 2: Space before movie details
+                // added for exercise 2: space before movie details
                 const SizedBox(height: 16),
-
-                // ADDED FOR EXERCISE 2: Row arranges movie details horizontally
-                // CHANGED FOR EXERCISE 5: Styled movie details
+                // added for exercise 2: row arranges movie details horizontaly
+                // changed for exercise 5: styled movie details
                 const Row(
                   children: [
                     Text(
@@ -217,26 +190,22 @@ class _MovieListingState extends State<MovieListing> {
                     ),
                   ],
                 ),
-
                 // ADDED FOR EXERCISE 3: Space before dropdown
                 const SizedBox(height: 20),
-
-                // ADDED FOR EXERCISE 3: Ticket quantity dropdown
+                // added for exercise 3: ticket quanity dropdown
                 DropdownMenu<int>(
                   initialSelection: 1,
-
-                  // ADDED: Runs when a quantity is selected
+                  // added: runs when a quanity is selected
                   onSelected: (int? value) {
-                    // ADDED: Check that a value was actually selected
+                    // added: check a value was actually selected
                     if (value != null) {
-                      // ADDED: Update state so Flutter rebuilds the screen
+                      // added: update state so Flutter rebuilds the screen
                       setState(() {
                         _ticketQuantity = value;
                       });
                     }
                   },
-
-                  // ADDED: Ticket quantities from 1 to 5
+                  // added: ticket quantities from 1 to 5
                   dropdownMenuEntries: const [
                     DropdownMenuEntry(value: 1, label: '1'),
                     DropdownMenuEntry(value: 2, label: '2'),
@@ -245,23 +214,19 @@ class _MovieListingState extends State<MovieListing> {
                     DropdownMenuEntry(value: 5, label: '5'),
                   ],
                 ),
-
-                // ADDED: Space before selected quantity text
+                // added: space before selected quanity text
                 const SizedBox(height: 12),
-
-                // ADDED: Shows the current selected quantity
-                // CHANGED FOR EXERCISE 5: Styled selected quantity text
+                // added: shows the current selected quanity
+                // changed for exercise 5: styled selected quanity text
                 Text(
                   'Tickets selected: $_ticketQuantity',
                   style: const TextStyle(
                     color: cinemaFontWhite,
                   ),
                 ),
-
-                // ADDED FOR EXERCISE 4: Space before booking button
+                // added for exercise 4: space before booking button
                 const SizedBox(height: 16),
-
-                // ADDED FOR EXERCISE 4: Add selected tickets to order
+                // added for exercise 4: add selected tickets to order
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
@@ -271,12 +236,10 @@ class _MovieListingState extends State<MovieListing> {
                   },
                   child: const Text('Add to order'),
                 ),
-
-                // ADDED FOR EXERCISE 4: Space before feedback
+                // added for exercise 4: space before feedback
                 const SizedBox(height: 12),
-
-                // ADDED FOR EXERCISE 4: Visual feedback for the user
-                // CHANGED FOR EXERCISE 5: Styled feedback message
+                // added for exercise 4: visual feedbak for the user
+                // changed for exercise 5: styled feedback mesage
                 Text(
                   _feedbackMessage,
                   style: const TextStyle(
