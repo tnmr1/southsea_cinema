@@ -22,9 +22,8 @@ class MovieListing extends StatelessWidget {
         // ADDED: Padding so the text is not touching the edge of the screen
         padding: const EdgeInsets.all(16),
 
-        // ADDED: Column to arrange the title and description vertically + align text to left
+        // ADDED: Column to arrange the content vertically
         child: const Column(
-
           crossAxisAlignment: CrossAxisAlignment.start,
 
           children: [
@@ -39,8 +38,25 @@ class MovieListing extends StatelessWidget {
             Text(
               'Batman faces a dangerous criminal mastermind who throws Gotham City into chaos.',
             ),
+
+            // added for ex2 : space befroe movie details
+            SizedBox(height: 16),
+
+            // added for ex2 : row to arrange movie detials horizontally
+            Row(
+              children: [
+                // ADDED: Movie runtime
+                Text('152 mins'),
+
+                // ADDED: Space between runtime and age rating
+                SizedBox(width: 20),
+
+                // ADDED: Age rating
+                Text('12A'),
+              ],
+            ),
           ],
-        ), 
+        ),
       ),
     );
   }
