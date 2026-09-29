@@ -31,6 +31,9 @@ class _MovieListingState extends State<MovieListing> {
 
       // ADDED: Container to hold the movie listing content
       body: Container(
+        // CHANGED FOR EXERCISE 5: Use cinema background colour
+        color: cinemaBackground,
+
         // ADDED: Padding so the text is not touching the edge
         padding: const EdgeInsets.all(16),
 
@@ -39,25 +42,44 @@ class _MovieListingState extends State<MovieListing> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // ADDED: Movie title
-            const Text('The Dark Knight'),
+            // CHANGED FOR EXERCISE 5: Styled movie title
+            const Text(
+              'The Dark Knight',
+              style: TextStyle(
+                color: cinemaFontWhite,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
 
             // ADDED: Space between title and description
             const SizedBox(height: 12),
 
             // ADDED: Short movie description
+            // CHANGED FOR EXERCISE 5: Styled description
             const Text(
               'Batman faces a dangerous criminal mastermind who throws Gotham City into chaos.',
+              style: TextStyle(
+                color: cinemaFontMuted,
+              ),
             ),
 
             // ADDED FOR EXERCISE 2: Space before movie details
             const SizedBox(height: 16),
 
             // ADDED FOR EXERCISE 2: Row arranges movie details horizontally
+            // CHANGED FOR EXERCISE 5: Styled movie details
             const Row(
               children: [
-                Text('152 mins'),
+                Text(
+                  '152 mins',
+                  style: TextStyle(color: cinemaFontWhite),
+                ),
                 SizedBox(width: 20),
-                Text('12A'),
+                Text(
+                  '12A',
+                  style: TextStyle(color: cinemaBrand),
+                ),
               ],
             ),
 
@@ -93,7 +115,13 @@ class _MovieListingState extends State<MovieListing> {
             const SizedBox(height: 12),
 
             // ADDED: Shows the current selected quantity
-            Text('Tickets selected: $_ticketQuantity'),
+            // CHANGED FOR EXERCISE 5: Styled selected quantity text
+            Text(
+              'Tickets selected: $_ticketQuantity',
+              style: const TextStyle(
+                color: cinemaFontWhite,
+              ),
+            ),
 
             // ADDED FOR EXERCISE 4: Space before booking button
             const SizedBox(height: 16),
@@ -113,7 +141,13 @@ class _MovieListingState extends State<MovieListing> {
             const SizedBox(height: 12),
 
             // ADDED FOR EXERCISE 4: Visual feedback for the user
-            Text(_feedbackMessage),
+            // CHANGED FOR EXERCISE 5: Styled feedback message
+            Text(
+              _feedbackMessage,
+              style: const TextStyle(
+                color: cinemaBrand,
+              ),
+            ),
           ],
         ),
       ),
