@@ -12,8 +12,11 @@ class MovieListing extends StatefulWidget {
 
 // ADDED: State class stores changing data
 class _MovieListingState extends State<MovieListing> {
-  // ADDED: Current selected ticket quantity
+  // ADDED FOR EXERCISE 3: Current selected ticket quantity
   int _ticketQuantity = 1;
+
+  // ADDED FOR EXERCISE 4: Feedback message shown after booking
+  String _feedbackMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +94,26 @@ class _MovieListingState extends State<MovieListing> {
 
             // ADDED: Shows the current selected quantity
             Text('Tickets selected: $_ticketQuantity'),
+
+            // ADDED FOR EXERCISE 4: Space before booking button
+            const SizedBox(height: 16),
+
+            // ADDED FOR EXERCISE 4: Add selected tickets to order
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _feedbackMessage =
+                      '$_ticketQuantity ticket(s) added to your order';
+                });
+              },
+              child: const Text('Add to order'),
+            ),
+
+            // ADDED FOR EXERCISE 4: Space before feedback
+            const SizedBox(height: 12),
+
+            // ADDED FOR EXERCISE 4: Visual feedback for the user
+            Text(_feedbackMessage),
           ],
         ),
       ),
