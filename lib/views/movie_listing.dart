@@ -92,7 +92,7 @@ class _MovieListingState extends State<MovieListing> {
               DropdownMenu<int>(
                 initialSelection: 1,
 
-                // added: runs when a quanity is selected
+                // added: runs when a quanity is selected ? meaning it can be null
                 onSelected: (int? value) {
                   // added: checks value isnt null
                   if (value != null) {
