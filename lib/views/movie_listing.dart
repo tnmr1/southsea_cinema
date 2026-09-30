@@ -41,6 +41,7 @@ class _MovieListingState extends State<MovieListing> {
             children: [
               // added for exercise 1: title and description container
               Container(
+                // color: Color(value),
                 child: Column(
                   children: [
                     // added for exercise 1: movie title
@@ -75,7 +76,7 @@ class _MovieListingState extends State<MovieListing> {
                     ),
                   ),
 
-                  const SizedBox(width: 16),
+                  SizedBox(width: 16),
 
                   Text(
                     '12A',
