@@ -88,7 +88,7 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 20),
 
-              // added for exercise 3: ticket quanity dropdown
+              // add for exercise 3: ticket quanity dropdown
               DropdownMenu<int>(
                 initialSelection: 1,
 
@@ -115,15 +115,15 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 20),
 
-              // added for exercise 6: checks avaliable screen width
+              // add for exercise 6: checks avaliable screen width
               LayoutBuilder(
                 builder: (context, constraints) {
-                  // added for exercise 6: wide screen uses a row
+                  // add for exercise 6: wide screen uses a row
                   if (constraints.maxWidth > 600) {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // added: shows selected ticket quanity
+                        // add: shows selected ticket quanity
                         Text(
                           'Tickets selected: $_ticketQuantity',
                           style: const TextStyle(
@@ -133,7 +133,7 @@ class _MovieListingState extends State<MovieListing> {
 
                         const SizedBox(width: 16),
 
-                        // added for exercise 4: add tickets to order button
+                        // add for exercise 4: add tickets to order button
                         ElevatedButton(
                           onPressed: () {
                             setState(() {
@@ -146,7 +146,7 @@ class _MovieListingState extends State<MovieListing> {
 
                         const SizedBox(width: 16),
 
-                        // added for exercise 4: visual feedbak
+                        // add for ex4: visual feedbak
                         Text(
                           _feedbackMessage,
                           style: const TextStyle(
@@ -156,7 +156,7 @@ class _MovieListingState extends State<MovieListing> {
                       ],
                     );
                   } else {
-                    // added for exercise 6: narrow screen uses a column
+                    // added for ex6: narrow screen uses a column
                     return Column(
                       children: [
                         // added: shows selected ticket quanity
@@ -169,7 +169,7 @@ class _MovieListingState extends State<MovieListing> {
 
                         const SizedBox(height: 16),
 
-                        // added for exercise 4: add tickets to order button
+                        // added for ex4: add tickets to order button
                         ElevatedButton(
                           onPressed: () {
                             setState(() {
@@ -182,7 +182,7 @@ class _MovieListingState extends State<MovieListing> {
 
                         const SizedBox(height: 16),
 
-                        // added for exercise 4: visual feedbak
+                        // added for ex4: visual feedbak
                         Text(
                           _feedbackMessage,
                           style: const TextStyle(
