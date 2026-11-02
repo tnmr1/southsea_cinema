@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
@@ -91,6 +92,16 @@ class _MovieListingState extends State<MovieListing> {
                     ),
                   ),
                 ],
+              ),
+
+              const SizedBox(height: 16),
+
+              // Displays the selected movie's formatted ticket price
+              Text(
+                widget.movie.formattedPrice,
+                style: const TextStyle(
+                  color: cinemaFontWhite,
+                ),
               ),
 
               const SizedBox(height: 20),
