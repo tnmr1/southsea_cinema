@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
@@ -12,7 +11,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     // Create the movie repository
     final MovieRepository repository = MovieRepository();
 
@@ -37,7 +35,6 @@ class HomeView extends StatelessWidget {
       body: ListView.builder(
         itemCount: movies.length,
         itemBuilder: (context, index) {
-
           // Create a card for each movie
           return MovieCard(
             movie: movies[index],

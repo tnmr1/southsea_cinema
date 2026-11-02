@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
@@ -48,26 +47,24 @@ class _MovieListingState extends State<MovieListing> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Movie title and description
-              Container(
-                child: Column(
-                  children: [
-                    // Displays the selected movie title
-                    Text(
-                      widget.movie.title,
-                      style: cinemaHeaderStyle,
-                    ),
+              Column(
+                children: [
+                  // Displays the selected movie title
+                  Text(
+                    widget.movie.title,
+                    style: cinemaHeaderStyle,
+                  ),
 
-                    const SizedBox(height: 12),
+                  const SizedBox(height: 12),
 
-                    // Displays the selected movie synopsis
-                    Text(
-                      widget.movie.synopsis,
-                      style: const TextStyle(
-                        color: cinemaFontMuted,
-                      ),
+                  // Displays the selected movie synopsis
+                  Text(
+                    widget.movie.synopsis,
+                    style: const TextStyle(
+                      color: cinemaFontMuted,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
 
               const SizedBox(height: 16),

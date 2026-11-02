@@ -1,6 +1,5 @@
 // Model class to store information about a movie
 class Movie {
-
   // Unique ID used to identify each movie
   final String id;
 
@@ -16,7 +15,7 @@ class Movie {
   // Path to the movie's poster image
   final String posterImagePath;
 
-    // Constructor to initialise all movie details
+  // Constructor to initialise all movie details
   const Movie({
     required this.id,
     required this.title,
@@ -26,8 +25,12 @@ class Movie {
     required this.ticketPrice,
     required this.posterImagePath,
   });
-  // Movie() is the constructor used to create a Movie object.
-  // required means every value must be provided when creating a movie.
-  // this.id assigns the supplied ID to the object's id field.
-  // const allows Movie objects to be created as constants when their values are constant.
+
+  // Returns the ticket price with £ and two decimal places
+  String get formattedPrice => '£${ticketPrice.toStringAsFixed(2)}';
 }
+
+// Movie() is the constructor used to create a Movie object.
+// required means every value must be provided when creating a movie.
+// this.id assigns the supplied ID to the object's id field.
+// const allows Movie objects to be created as constants when their values are constant.
