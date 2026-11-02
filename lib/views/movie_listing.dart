@@ -1,21 +1,30 @@
+
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
+import 'package:southsea_cinema/models/movie.dart';
 
-// changed: StatefulWidget because ticket quanity can change
+// StatefulWidget because ticket quantity can change
+// Displays the selected movie's booking page
 class MovieListing extends StatefulWidget {
-  const MovieListing({super.key});
+  // Stores the selected movie
+  final Movie movie;
+
+  const MovieListing({
+    super.key,
+    required this.movie,
+  });
 
   @override
   State<MovieListing> createState() => _MovieListingState();
 }
 
-// added: state class stores changing data
+// State class stores changing data
 class _MovieListingState extends State<MovieListing> {
-  // added for exercise 3: current selected ticket quanity
+  // Current selected ticket quantity
   int _ticketQuantity = 1;
 
-  // added for exercise 4: feedback mesage shown after booking
+  // Feedback message shown after booking
   String _feedbackMessage = '';
 
   @override
@@ -29,33 +38,31 @@ class _MovieListingState extends State<MovieListing> {
       ),
       drawer: const NavDrawer(),
 
-      // added for exercise 1: container holds movie listing
+      // Container holds the selected movie listing
       body: Container(
-        // changed for exercise 5: use cinema background colour
         color: cinemaBackground,
 
-        // added for exercise 2: column arranges widgets verticaly
+        // Column arranges widgets vertically
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // added for exercise 1: title and description container
+              // Movie title and description
               Container(
-                // color: Color(value),
                 child: Column(
                   children: [
-                    // added for exercise 1: movie title
-                    const Text(
-                      'The Dark Knight',
+                    // Displays the selected movie title
+                    Text(
+                      widget.movie.title,
                       style: cinemaHeaderStyle,
                     ),
 
                     const SizedBox(height: 12),
 
-                    // added for exercise 1: short movie description
-                    const Text(
-                      'Batman faces a dangerous criminal mastermind who throws Gotham City into chaos.',
-                      style: TextStyle(
+                    // Displays the selected movie synopsis
+                    Text(
+                      widget.movie.synopsis,
+                      style: const TextStyle(
                         color: cinemaFontMuted,
                       ),
                     ),
@@ -65,22 +72,24 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 16),
 
-              // added for exercise 2: row arranges movie details horizontaly
-              const Row(
+              // Displays the selected movie's screening details
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // Screening time from the Movie model
                   Text(
-                    '152 mins',
-                    style: TextStyle(
+                    widget.movie.screeningTime,
+                    style: const TextStyle(
                       color: cinemaFontWhite,
                     ),
                   ),
 
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
 
+                  // Age rating from the Movie model
                   Text(
-                    '12A',
-                    style: TextStyle(
+                    widget.movie.ageRating,
+                    style: const TextStyle(
                       color: cinemaBrand,
                     ),
                   ),
@@ -89,22 +98,20 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 20),
 
-              // add for exercise 3: ticket quanity dropdown
+              // Ticket quantity dropdown
               DropdownMenu<int>(
-                initialSelection: 1,
+                initialSelection: _ticketQuantity,
 
-                // added: runs when a quanity is selected ? meaning it can be null
                 onSelected: (int? value) {
-                  // added: checks value isnt null
+                  // Checks the selected value is not null
                   if (value != null) {
-                    // added: setState updates the screen
                     setState(() {
                       _ticketQuantity = value;
                     });
                   }
                 },
 
-                // added: ticket quantities from 1 to 5
+                // Ticket quantities from 1 to 5
                 dropdownMenuEntries: const [
                   DropdownMenuEntry(value: 1, label: '1'),
                   DropdownMenuEntry(value: 2, label: '2'),
@@ -116,15 +123,15 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 20),
 
-              // add for exercise 6: checks avaliable screen width
+              // LayoutBuilder checks available screen width
               LayoutBuilder(
                 builder: (context, constraints) {
-                  // add for exercise 6: wide screen uses a row
+                  // Wide screen uses a Row
                   if (constraints.maxWidth > 600) {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // add: shows selected ticket quanity
+                        // Displays selected ticket quantity
                         Text(
                           'Tickets selected: $_ticketQuantity',
                           style: const TextStyle(
@@ -134,7 +141,7 @@ class _MovieListingState extends State<MovieListing> {
 
                         const SizedBox(width: 16),
 
-                        // add for exercise 4: add tickets to order button
+                        // Adds selected tickets to the order
                         ElevatedButton(
                           onPressed: () {
                             setState(() {
@@ -147,7 +154,7 @@ class _MovieListingState extends State<MovieListing> {
 
                         const SizedBox(width: 16),
 
-                        // add for ex4: visual feedbak
+                        // Displays booking feedback
                         Text(
                           _feedbackMessage,
                           style: const TextStyle(
@@ -157,10 +164,10 @@ class _MovieListingState extends State<MovieListing> {
                       ],
                     );
                   } else {
-                    // added for ex6: narrow screen uses a column
+                    // Narrow screen uses a Column
                     return Column(
                       children: [
-                        // added: shows selected ticket quanity
+                        // Displays selected ticket quantity
                         Text(
                           'Tickets selected: $_ticketQuantity',
                           style: const TextStyle(
@@ -170,7 +177,7 @@ class _MovieListingState extends State<MovieListing> {
 
                         const SizedBox(height: 16),
 
-                        // added for ex4: add tickets to order button
+                        // Adds selected tickets to the order
                         ElevatedButton(
                           onPressed: () {
                             setState(() {
@@ -183,7 +190,7 @@ class _MovieListingState extends State<MovieListing> {
 
                         const SizedBox(height: 16),
 
-                        // added for ex4: visual feedbak
+                        // Displays booking feedback
                         Text(
                           _feedbackMessage,
                           style: const TextStyle(
