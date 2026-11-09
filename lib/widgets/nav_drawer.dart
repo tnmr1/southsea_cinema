@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 
@@ -36,8 +37,23 @@ class NavDrawer extends StatelessWidget {
               ),
             ),
 
-            // Keep the Home navigation link
-            const DrawerTile(title: 'Home', route: '/'),
+            // Home navigation link
+            const DrawerTile(
+              title: 'Home',
+              route: '/',
+            ),
+
+            // Navigate to the basket screen
+            const DrawerTile(
+              title: 'My Basket',
+              route: '/basket',
+            ),
+
+            // Navigate to the settings screen
+            const DrawerTile(
+              title: 'My Settings',
+              route: '/settings',
+            ),
           ],
         ),
       ),
@@ -45,6 +61,7 @@ class NavDrawer extends StatelessWidget {
   }
 }
 
+// Reusable navigation tile
 class DrawerTile extends StatelessWidget {
   final String title;
   final String? route;
@@ -63,7 +80,10 @@ class DrawerTile extends StatelessWidget {
         style: const TextStyle(color: cinemaFontWhite),
       ),
       onTap: () {
+        // Close the navigation drawer
         Navigator.pop(context);
+
+        // Navigate to the selected route
         if (route != null) {
           Navigator.pushNamed(context, route!);
         }
@@ -71,3 +91,10 @@ class DrawerTile extends StatelessWidget {
     );
   }
 }
+
+
+// How navigation works
+// Drawer option	Route	Destination
+// Home	/	Cinema home page
+// My Basket	/basket	Basket page
+// My Settings	/settings	Settings page
