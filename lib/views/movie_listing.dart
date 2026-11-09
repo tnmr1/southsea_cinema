@@ -1,9 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/widgets/primary_button.dart';
+import 'package:southsea_cinema/models/basket_item.dart';
+import 'package:southsea_cinema/repositories/basket_repository.dart';
 
 // StatefulWidget because ticket quantity can change
 // Displays the selected movie's booking page
@@ -27,6 +28,32 @@ class _MovieListingState extends State<MovieListing> {
 
   // Feedback message shown after booking
   String _feedbackMessage = '';
+
+  // Adds the selected movie tickets to the basket
+  void _addToBasket() {
+    // Create a basket item with the selected quantity
+    final BasketItem item = BasketItem(
+      movie: widget.movie,
+      quantity: _ticketQuantity,
+    );
+
+    // Add the tickets to the shared basket repository
+    BasketRepository.instance.addItem(item);
+
+    // Display confirmation to the customer
+    setState(() {
+      _feedbackMessage = '$_ticketQuantity ticket(s) added to your order';
+    });
+  }
+
+// What does it do?
+// Suppose a customer selects Iron Man and chooses three tickets.
+
+// The method:
+// 1. Creates a BasketItem containing Iron Man and quantity 3.
+// 2. Adds that item to BasketRepository.instance.
+// 3. Displays the confirmation message.
+// The shared repository now holds the tickets until the customer removes them or checks out.
 
   @override
   Widget build(BuildContext context) {
@@ -151,14 +178,10 @@ class _MovieListingState extends State<MovieListing> {
                         const SizedBox(width: 16),
 
                         // Reusable square Add to order button
+
                         PrimaryButton(
                           label: 'Add to order',
-                          onPressed: () {
-                            setState(() {
-                              _feedbackMessage =
-                                  '$_ticketQuantity ticket(s) added to your order';
-                            });
-                          },
+                          onPressed: _addToBasket,
                         ),
 
                         const SizedBox(width: 16),
@@ -187,14 +210,10 @@ class _MovieListingState extends State<MovieListing> {
                         const SizedBox(height: 16),
 
                         // Reusable square Add to order button
+
                         PrimaryButton(
                           label: 'Add to order',
-                          onPressed: () {
-                            setState(() {
-                              _feedbackMessage =
-                                  '$_ticketQuantity ticket(s) added to your order';
-                            });
-                          },
+                          onPressed: _addToBasket,
                         ),
 
                         const SizedBox(height: 16),
