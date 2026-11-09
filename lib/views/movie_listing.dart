@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/models/movie.dart';
+import 'package:southsea_cinema/widgets/primary_button.dart';
 
 // StatefulWidget because ticket quantity can change
 // Displays the selected movie's booking page
@@ -149,15 +150,15 @@ class _MovieListingState extends State<MovieListing> {
 
                         const SizedBox(width: 16),
 
-                        // Adds selected tickets to the order
-                        ElevatedButton(
+                        // Reusable square Add to order button
+                        PrimaryButton(
+                          label: 'Add to order',
                           onPressed: () {
                             setState(() {
                               _feedbackMessage =
                                   '$_ticketQuantity ticket(s) added to your order';
                             });
                           },
-                          child: const Text('Add to order'),
                         ),
 
                         const SizedBox(width: 16),
@@ -185,15 +186,15 @@ class _MovieListingState extends State<MovieListing> {
 
                         const SizedBox(height: 16),
 
-                        // Adds selected tickets to the order
-                        ElevatedButton(
+                        // Reusable square Add to order button
+                        PrimaryButton(
+                          label: 'Add to order',
                           onPressed: () {
                             setState(() {
                               _feedbackMessage =
                                   '$_ticketQuantity ticket(s) added to your order';
                             });
                           },
-                          child: const Text('Add to order'),
                         ),
 
                         const SizedBox(height: 16),

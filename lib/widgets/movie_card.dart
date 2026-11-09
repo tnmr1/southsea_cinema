@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/views/movie_listing.dart';
+import 'package:southsea_cinema/widgets/primary_button.dart';
 
 // Reusable widget for displaying one movie
 class MovieCard extends StatelessWidget {
@@ -90,19 +91,22 @@ class MovieCard extends StatelessWidget {
                 ),
 
                 // Opens booking page for selected movie
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return MovieListing(movie: movie);
-                        },
-                      ),
-                    );
-                  },
-                  child: const Text('BOOK NOW'),
-                ),
+                
+// Opens booking page for selected movie
+PrimaryButton(
+  label: 'BOOK NOW',
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return MovieListing(movie: movie);
+        },
+      ),
+    );
+  },
+),
+
               ],
             ),
           ],
@@ -129,3 +133,11 @@ class MovieCard extends StatelessWidget {
 // Expanded	Prevents text from overflowing horizontally
 // Column	Places the movie details vertically
 // movie.title	Gets the title from the Movie object
+
+
+// What changed?
+// Before	After
+// ElevatedButton	PrimaryButton
+// child: const Text('BOOK NOW')	label: 'BOOK NOW'
+// Default rounded corners	Square corners
+// Navigation to MovieListing	Navigation remains unchanged
