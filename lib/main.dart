@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/views/home_view.dart';
+import 'package:southsea_cinema/views/basket_view.dart';
+import 'package:southsea_cinema/views/settings_view.dart';
 
 void main() {
   runApp(const SouthseaCinemaApp());
@@ -15,6 +17,7 @@ class SouthseaCinemaApp extends StatelessWidget {
     return MaterialApp(
       title: appTitle,
       debugShowCheckedModeBanner: false,
+
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: cinemaBackground,
         colorScheme: ColorScheme.fromSeed(
@@ -23,7 +26,7 @@ class SouthseaCinemaApp extends StatelessWidget {
           surface: cinemaSurface,
         ),
 
-        // Shared app bar theme - Worksheet 5 Exercise 1
+        // Shared app bar theme
         appBarTheme: const AppBarTheme(
           backgroundColor: cinemaSurface,
           iconTheme: IconThemeData(color: cinemaBrand),
@@ -32,11 +35,17 @@ class SouthseaCinemaApp extends StatelessWidget {
         ),
       ),
 
-      // Home page of Southsea Cinema
+      // Named routes for navigation
       initialRoute: '/',
       routes: {
         '/': (context) => const HomeView(),
+        '/basket': (context) => const BasketView(),
+        '/settings': (context) => const SettingsView(),
       },
     );
   }
 }
+
+// /	HomeView
+// /basket	BasketView
+// /settings	SettingsView
