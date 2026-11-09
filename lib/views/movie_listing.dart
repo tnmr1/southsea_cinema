@@ -30,12 +30,12 @@ class _MovieListingState extends State<MovieListing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Uses the shared AppBarTheme from main.dart
       appBar: AppBar(
-        title: const Text(appTitle, style: cinemaHeaderStyle),
-        backgroundColor: cinemaSurface,
-        iconTheme: const IconThemeData(color: cinemaBrand),
-        elevation: 0,
+        title: const Text(appTitle),
       ),
+
+      // Keep the existing navigation drawer
       drawer: const NavDrawer(),
 
       // Container holds the selected movie listing

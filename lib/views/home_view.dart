@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
@@ -18,14 +19,9 @@ class HomeView extends StatelessWidget {
     final List<Movie> movies = repository.getMovies();
 
     return Scaffold(
+      // Uses the shared AppBarTheme from main.dart
       appBar: AppBar(
-        title: const Text(
-          appTitle,
-          style: cinemaHeaderStyle,
-        ),
-        backgroundColor: cinemaSurface,
-        iconTheme: const IconThemeData(color: cinemaBrand),
-        elevation: 0,
+        title: const Text(appTitle),
       ),
 
       // Keep the existing navigation drawer
@@ -43,12 +39,5 @@ class HomeView extends StatelessWidget {
       ),
     );
   }
+  
 }
-
-// imports	Added Movie, MovieRepository and MovieCard
-// MovieRepository()	Creates the repository
-// getMovies()	Retrieves your Iron Man and Captain America movies
-// ListView.builder	Displays the movies in a scrollable list
-// MovieCard(movie: movies[index])	Creates a card for each movie
-// AppBar	Kept your original
-// NavDrawer	Kept your original
