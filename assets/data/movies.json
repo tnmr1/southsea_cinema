@@ -1,0 +1,22 @@
+Understand the JSON structure
+Your Movie model contains seven fields:
+Field	JSON type
+id	String
+title	String
+synopsis	String
+ageRating	String
+screeningTime	String
+ticketPrice	Number
+posterImagePath	String
+
+For example, one movie would look like this:
+
+{
+  "id": "iron-man",
+  "title": "Iron Man",
+  "synopsis": "A superhero film about Iron Man.",
+  "ageRating": "12A",
+  "screeningTime": "18:00",
+  "ticketPrice": 7.50,
+  "posterImagePath": "assets/images/iron man.jpeg"
+}
