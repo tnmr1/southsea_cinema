@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/basket_item.dart';
@@ -17,8 +16,7 @@ class BasketView extends StatefulWidget {
 // State class manages changes to the basket
 class _BasketViewState extends State<BasketView> {
   // Access the shared basket repository
-  final BasketRepository _basket =
-      BasketRepository.instance;
+  final BasketRepository _basket = BasketRepository.instance;
 
   // Remove an item from the basket
   void _removeItem(int index) {
@@ -90,8 +88,7 @@ class _BasketViewState extends State<BasketView> {
                           child: Padding(
                             padding: const EdgeInsets.all(16),
                             child: Column(
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 // Movie title
                                 Text(
@@ -187,4 +184,3 @@ class _BasketViewState extends State<BasketView> {
 // getTotalDue()	Calculates the total cost
 // _checkout()	Clears the basket
 // SnackBar	Displays checkout confirmation
-

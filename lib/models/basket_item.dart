@@ -1,4 +1,3 @@
-
 import 'package:southsea_cinema/models/movie.dart';
 
 // Represents one movie and its ticket quantity
@@ -29,4 +28,3 @@ class BasketItem {
 // 3 tickets	£22.50
 
 // The lineTotal getter calculates this automatically.
-

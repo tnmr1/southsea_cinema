@@ -1,4 +1,3 @@
-
 import 'package:southsea_cinema/models/basket_item.dart';
 
 // Shared repository for cinema tickets
@@ -7,8 +6,7 @@ class BasketRepository {
   BasketRepository._internal();
 
   // Single shared instance
-  static final BasketRepository instance =
-      BasketRepository._internal();
+  static final BasketRepository instance = BasketRepository._internal();
 
   // Stores all basket items
   final List<BasketItem> _items = [];

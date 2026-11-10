@@ -1,4 +1,3 @@
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/models/basket_item.dart';
@@ -24,8 +23,7 @@ void main() {
   group('BasketRepository tests', () {
     // Test 1: Empty basket
     test('starts with an empty basket', () {
-      final BasketRepository basket =
-          BasketRepository.instance;
+      final BasketRepository basket = BasketRepository.instance;
 
       expect(basket.getItems().length, 0);
       expect(basket.getTotalItems(), 0);
@@ -36,8 +34,7 @@ void main() {
 
     // Test 2: Adding tickets
     test('adds tickets and calculates total', () {
-      final BasketRepository basket =
-          BasketRepository.instance;
+      final BasketRepository basket = BasketRepository.instance;
 
       const BasketItem item = BasketItem(
         movie: testMovie,
@@ -54,8 +51,7 @@ void main() {
 
     // Test 3: Removing tickets
     test('removes basket items correctly', () {
-      final BasketRepository basket =
-          BasketRepository.instance;
+      final BasketRepository basket = BasketRepository.instance;
 
       const BasketItem item = BasketItem(
         movie: testMovie,
@@ -74,8 +70,7 @@ void main() {
 
     // Test 4: Clearing the basket
     test('clears all basket items', () {
-      final BasketRepository basket =
-          BasketRepository.instance;
+      final BasketRepository basket = BasketRepository.instance;
 
       const BasketItem item = BasketItem(
         movie: testMovie,

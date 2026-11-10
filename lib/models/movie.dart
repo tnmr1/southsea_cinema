@@ -1,4 +1,3 @@
-
 // Model class to store information about a movie
 class Movie {
   // Unique ID used to identify each movie
@@ -33,14 +32,12 @@ class Movie {
     final String title = json['title'] as String;
     final String synopsis = json['synopsis'] as String;
     final String ageRating = json['ageRating'] as String;
-    final String screeningTime =
-        json['screeningTime'] as String;
+    final String screeningTime = json['screeningTime'] as String;
 
     final num priceNumber = json['ticketPrice'] as num;
     final double ticketPrice = priceNumber.toDouble();
 
-    final String posterImagePath =
-        json['posterImagePath'] as String;
+    final String posterImagePath = json['posterImagePath'] as String;
 
     return Movie(
       id: id,
@@ -69,10 +66,8 @@ class Movie {
   }
 
   // Format ticket price with £ and two decimal places
-  String get formattedPrice =>
-      '£${ticketPrice.toStringAsFixed(2)}';
+  String get formattedPrice => '£${ticketPrice.toStringAsFixed(2)}';
 }
-
 
 // factory Movie.fromJson()	Creates a Movie from JSON data
 // Map<String, dynamic>	Holds JSON fields and their values
@@ -82,4 +77,3 @@ class Movie {
 // toJson()	Converts the Movie back into a map
 
 // Your existing constructor, properties and formattedPrice getter remain available.
-

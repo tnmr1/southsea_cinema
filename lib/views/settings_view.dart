@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/user_settings.dart';
@@ -61,8 +60,7 @@ class _SettingsViewState extends State<SettingsView> {
 
     // Display confirmation
     setState(() {
-      _confirmationMessage =
-          'Settings saved for ${settings.name}';
+      _confirmationMessage = 'Settings saved for ${settings.name}';
     });
   }
 
@@ -137,7 +135,6 @@ class _SettingsViewState extends State<SettingsView> {
                     'Receive newsletter and offers',
                   ),
                 ),
-
                 Switch(
                   value: _receiveNewsletter,
                   onChanged: (bool value) {
@@ -163,7 +160,6 @@ class _SettingsViewState extends State<SettingsView> {
             // Display confirmation after saving
             if (_confirmationMessage.isNotEmpty) ...[
               const SizedBox(height: 12),
-
               Text(
                 _confirmationMessage,
                 style: const TextStyle(

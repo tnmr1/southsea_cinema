@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
@@ -57,22 +56,19 @@ class MovieRepository {
     String assetPath = 'assets/data/movies.json',
   }) async {
     // Read the JSON file as text
-    final String jsonString =
-        await rootBundle.loadString(assetPath);
+    final String jsonString = await rootBundle.loadString(assetPath);
 
     // Decode the JSON text
     final dynamic decodedData = jsonDecode(jsonString);
 
     // Convert decoded data into a list
-    final List<dynamic> jsonList =
-        decodedData as List<dynamic>;
+    final List<dynamic> jsonList = decodedData as List<dynamic>;
 
     final List<Movie> loadedMovies = [];
 
     // Convert each JSON object into a Movie
     for (final dynamic item in jsonList) {
-      final Map<String, dynamic> itemMap =
-          item as Map<String, dynamic>;
+      final Map<String, dynamic> itemMap = item as Map<String, dynamic>;
 
       final Movie movie = Movie.fromJson(itemMap);
 

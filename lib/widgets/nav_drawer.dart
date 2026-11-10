@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 
@@ -91,7 +90,6 @@ class DrawerTile extends StatelessWidget {
     );
   }
 }
-
 
 // How navigation works
 // Drawer option	Route	Destination

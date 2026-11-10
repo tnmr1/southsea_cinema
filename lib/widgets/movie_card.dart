@@ -91,22 +91,21 @@ class MovieCard extends StatelessWidget {
                 ),
 
                 // Opens booking page for selected movie
-                
-// Opens booking page for selected movie
-PrimaryButton(
-  label: 'BOOK NOW',
-  onPressed: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return MovieListing(movie: movie);
-        },
-      ),
-    );
-  },
-),
 
+// Opens booking page for selected movie
+                PrimaryButton(
+                  label: 'BOOK NOW',
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return MovieListing(movie: movie);
+                        },
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ],
@@ -133,7 +132,6 @@ PrimaryButton(
 // Expanded	Prevents text from overflowing horizontally
 // Column	Places the movie details vertically
 // movie.title	Gets the title from the Movie object
-
 
 // What changed?
 // Before	After

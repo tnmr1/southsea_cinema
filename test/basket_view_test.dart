@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/models/movie.dart';
@@ -25,8 +24,7 @@ void main() {
 
   group('BasketView widget tests', () {
     // Test 1: Empty basket message
-    testWidgets('displays empty basket message',
-        (WidgetTester tester) async {
+    testWidgets('displays empty basket message', (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: BasketView(),
@@ -40,8 +38,7 @@ void main() {
     });
 
     // Test 2: Display selected tickets
-    testWidgets('displays basket items and total',
-        (WidgetTester tester) async {
+    testWidgets('displays basket items and total', (WidgetTester tester) async {
       // Add two Iron Man tickets
       BasketRepository.instance.addItem(
         const BasketItem(
@@ -70,8 +67,7 @@ void main() {
     });
 
     // Test 3: Remove tickets
-    testWidgets('removes tickets from basket',
-        (WidgetTester tester) async {
+    testWidgets('removes tickets from basket', (WidgetTester tester) async {
       BasketRepository.instance.addItem(
         const BasketItem(
           movie: testMovie,
@@ -102,8 +98,7 @@ void main() {
     });
 
     // Test 4: Checkout clears basket
-    testWidgets('checkout clears basket',
-        (WidgetTester tester) async {
+    testWidgets('checkout clears basket', (WidgetTester tester) async {
       BasketRepository.instance.addItem(
         const BasketItem(
           movie: testMovie,
@@ -154,6 +149,4 @@ void main() {
 //   BasketRepository.instance.clear();
 // });
 
-
 // This ensures every test starts with an empty basket.
-

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/views/settings_view.dart';
@@ -29,14 +28,12 @@ void main() {
     );
 
     // Find the text fields
-    final Finder nameField =
-        find.widgetWithText(TextField, 'Full name');
+    final Finder nameField = find.widgetWithText(TextField, 'Full name');
 
     final Finder addressField =
         find.widgetWithText(TextField, 'Delivery address');
 
-    final Finder emailField =
-        find.widgetWithText(TextField, 'Email address');
+    final Finder emailField = find.widgetWithText(TextField, 'Email address');
 
     // Enter fictional customer details
     await tester.enterText(nameField, 'Alex Smith');

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
@@ -39,8 +38,7 @@ class _HomeViewState extends State<HomeView> {
       final MovieRepository repository = MovieRepository();
 
       // Wait for the movies to load from JSON
-      final List<Movie> movies =
-          await repository.loadMoviesFromAsset();
+      final List<Movie> movies = await repository.loadMoviesFromAsset();
 
       // Check that the widget is still active
       if (!mounted) {
@@ -103,7 +101,6 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 }
-
 
 // the changes
 // Component	What it does

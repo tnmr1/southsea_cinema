@@ -1,4 +1,3 @@
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/repositories/movie_repository.dart';
@@ -44,8 +43,7 @@ void main() {
     test('getMovieById returns matching movie', () {
       final MovieRepository repository = MovieRepository();
 
-      final Movie? movie =
-          repository.getMovieById('iron-man');
+      final Movie? movie = repository.getMovieById('iron-man');
 
       expect(movie, isNotNull);
       expect(movie?.title, 'Iron Man');
@@ -56,20 +54,17 @@ void main() {
     test('getMovieById returns null for missing ID', () {
       final MovieRepository repository = MovieRepository();
 
-      final Movie? movie =
-          repository.getMovieById('non-existent');
+      final Movie? movie = repository.getMovieById('non-existent');
 
       expect(movie, isNull);
     });
 
     // Test 5: Load movies from the JSON asset
-    test('loadMoviesFromAsset reads the bundled JSON movies',
-        () async {
+    test('loadMoviesFromAsset reads the bundled JSON movies', () async {
       final MovieRepository repository = MovieRepository();
 
       // Load movie data from assets/data/movies.json
-      final List<Movie> movies =
-          await repository.loadMoviesFromAsset();
+      final List<Movie> movies = await repository.loadMoviesFromAsset();
 
       // Check that both movies are loaded
       expect(movies.length, 2);

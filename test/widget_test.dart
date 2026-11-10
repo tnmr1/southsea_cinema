@@ -1,4 +1,3 @@
-
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/main.dart';
@@ -13,8 +12,7 @@ void main() {
   // Group tests for the Southsea Cinema application
   group('App smoke tests', () {
     // Test 1: Check that the application displays HomeView
-    testWidgets('App displays HomeView',
-        (WidgetTester tester) async {
+    testWidgets('App displays HomeView', (WidgetTester tester) async {
       await tester.pumpWidget(
         const SouthseaCinemaApp(),
       );
@@ -69,12 +67,10 @@ void main() {
 // We've added:
 // import 'package:flutter/services.dart';
 
-
 // And:
 // setUp(() {
 //   rootBundle.clear();
 // });
-
 
 // The setUp() function runs before each test.
 

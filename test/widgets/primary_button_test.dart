@@ -1,12 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/widgets/primary_button.dart';
 
 void main() {
   // Check that the button displays its label
-  testWidgets('PrimaryButton displays its label',
-      (WidgetTester tester) async {
+  testWidgets('PrimaryButton displays its label', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
