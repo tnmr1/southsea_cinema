@@ -1,39 +1,83 @@
+
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/main.dart';
 import 'package:southsea_cinema/views/home_view.dart';
 
 void main() {
+  // Clear cached JSON assets before each test
+  setUp(() {
+    rootBundle.clear();
+  });
+
   // Group tests for the Southsea Cinema application
   group('App smoke tests', () {
-    // Test that the application displays the home page
-    testWidgets('App displays HomeView', (WidgetTester tester) async {
-      await tester.pumpWidget(const SouthseaCinemaApp());
+    // Test 1: Check that the application displays HomeView
+    testWidgets('App displays HomeView',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const SouthseaCinemaApp(),
+      );
 
-      expect(find.byType(HomeView), findsOneWidget);
+      // Wait for asynchronous movie loading
+      await tester.pumpAndSettle();
+
+      // Check that HomeView is displayed
+      expect(
+        find.byType(HomeView),
+        findsOneWidget,
+      );
     });
 
-    // Test that movie cards display their information
+    // Test 2: Check movie cards and booking buttons
     testWidgets('Displays movie cards and booking buttons',
         (WidgetTester tester) async {
-      await tester.pumpWidget(const SouthseaCinemaApp());
+      await tester.pumpWidget(
+        const SouthseaCinemaApp(),
+      );
+
+      // Wait for JSON loading to complete
+      await tester.pumpAndSettle();
 
       // Check both movie titles
-      expect(find.text('Iron Man'), findsOneWidget);
-      expect(find.text('Captain America'), findsOneWidget);
+      expect(
+        find.text('Iron Man'),
+        findsOneWidget,
+      );
 
-      // Check the ticket prices
-      expect(find.text('£7.50'), findsNWidgets(2));
+      expect(
+        find.text('Captain America'),
+        findsOneWidget,
+      );
 
-      // Check that there are two booking buttons
-      expect(find.text('BOOK NOW'), findsNWidgets(2));
+      // Check ticket prices
+      expect(
+        find.text('£7.50'),
+        findsNWidgets(2),
+      );
+
+      // Check booking buttons
+      expect(
+        find.text('BOOK NOW'),
+        findsNWidgets(2),
+      );
     });
   });
 }
 
-// testWidgets()	Creates a widget test
-// WidgetTester tester	Provides tools for interacting with widgets
-// pumpWidget()	Builds the app in the test environment
-// find.byType(HomeView)	Finds the home page widget
-// find.text()	Searches for text displayed on screen
-// findsOneWidget	Expects exactly one match
-// findsNWidgets(2)	Expects exactly two matches
+// Step 2: What changed?
+// We've added:
+// import 'package:flutter/services.dart';
+
+
+// And:
+// setUp(() {
+//   rootBundle.clear();
+// });
+
+
+// The setUp() function runs before each test.
+
+// This ensures that each test starts with cleared asset-read cache state.
+
+// Your pumpAndSettle() calls remain because Worksheet 6 requires the tests to wait for asynchronous movie loading.
