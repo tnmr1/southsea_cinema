@@ -8,7 +8,7 @@ import 'package:southsea_cinema/models/user_settings.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/widgets/primary_button.dart';
 
-// Customer profile settings screen
+// Customer profile settings screen.
 class SettingsView extends StatefulWidget {
   const SettingsView({super.key});
 
@@ -17,34 +17,38 @@ class SettingsView extends StatefulWidget {
 }
 
 class _SettingsViewState extends State<SettingsView> {
-  // Controllers for customer information
+  // Controllers for customer information.
   late TextEditingController _nameController;
   late TextEditingController _addressController;
   late TextEditingController _emailController;
 
-  // Newsletter preference
+  // Existing newsletter preference.
   bool _receiveNewsletter = false;
 
-  // Worksheet 8: Read the current accessibility preference.
+  // Worksheet 8: Current accessibility preference.
   bool _biggerText = biggerTextEnabled.value;
 
-  // Confirmation message
+  // Worksheet 8: Current dark mode preference.
+  bool _darkMode = cinemaThemeMode.value == ThemeMode.dark;
+
+  // Confirmation message.
   String _confirmationMessage = '';
 
   @override
   void initState() {
     super.initState();
 
-    // Create controllers for the profile form.
+    // Create controllers for the customer profile.
     _nameController = TextEditingController();
     _addressController = TextEditingController();
     _emailController = TextEditingController();
 
-    // Keep this screen in sync when the saved setting loads.
+    // Keep the switches in sync with global preferences.
     biggerTextEnabled.addListener(_updateBiggerText);
+    cinemaThemeMode.addListener(_updateDarkMode);
   }
 
-  // Update the switch when the global preference changes.
+  // Update the Bigger text switch when its value changes.
   void _updateBiggerText() {
     if (!mounted) return;
 
@@ -53,28 +57,56 @@ class _SettingsViewState extends State<SettingsView> {
     });
   }
 
-  // Worksheet 8: Change and save the Bigger text preference.
+  // Update the Dark mode switch when its value changes.
+  void _updateDarkMode() {
+    if (!mounted) return;
+
+    setState(() {
+      _darkMode = cinemaThemeMode.value == ThemeMode.dark;
+    });
+  }
+
+  // Worksheet 8: Change and save Bigger text.
   Future<void> _changeBiggerText(bool value) async {
-    // Update the switch and all app screens immediately.
+    // Update the switch and the whole application.
     setState(() {
       _biggerText = value;
     });
 
     biggerTextEnabled.value = value;
 
-    // Store the user's choice on the device.
+    // Save the preference on the device.
     final SharedPreferences prefs =
         await SharedPreferences.getInstance();
 
     await prefs.setBool('biggerText', value);
   }
 
+  // Worksheet 8: Change and save Light/Dark mode.
+  Future<void> _changeDarkMode(bool value) async {
+    // Update the current switch.
+    setState(() {
+      _darkMode = value;
+    });
+
+    // Rebuild MaterialApp with the selected theme.
+    cinemaThemeMode.value =
+        value ? ThemeMode.dark : ThemeMode.light;
+
+    // Save the preference using SharedPreferencesAsync.
+    final SharedPreferencesAsync prefs =
+        SharedPreferencesAsync();
+
+    await prefs.setBool('darkMode', value);
+  }
+
   @override
   void dispose() {
-    // Stop listening when the screen closes.
+    // Stop listening when leaving this screen.
     biggerTextEnabled.removeListener(_updateBiggerText);
+    cinemaThemeMode.removeListener(_updateDarkMode);
 
-    // Release the text controllers.
+    // Release text field controllers.
     _nameController.dispose();
     _addressController.dispose();
     _emailController.dispose();
@@ -82,7 +114,7 @@ class _SettingsViewState extends State<SettingsView> {
     super.dispose();
   }
 
-  // Save the customer's existing profile settings.
+  // Save existing customer profile settings.
   void _saveSettings() {
     final String name = _nameController.text.trim();
     final String address = _addressController.text.trim();
@@ -96,9 +128,10 @@ class _SettingsViewState extends State<SettingsView> {
       receiveNewsletter: _receiveNewsletter,
     );
 
-    // Display a confirmation message.
+    // Display confirmation after saving.
     setState(() {
-      _confirmationMessage = 'Settings saved for ${settings.name}';
+      _confirmationMessage =
+          'Settings saved for ${settings.name}';
     });
   }
 
@@ -152,7 +185,7 @@ class _SettingsViewState extends State<SettingsView> {
 
             const SizedBox(height: 16),
 
-            // Customer email address.
+            // Customer email.
             TextField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
@@ -192,17 +225,26 @@ class _SettingsViewState extends State<SettingsView> {
               subtitle: const Text(
                 'Increase text size for easier reading',
               ),
-
-              // Read the current preference.
               value: _biggerText,
-
-              // Update the whole app and save the choice.
               onChanged: _changeBiggerText,
+            ),
+
+            const SizedBox(height: 8),
+
+            // Worksheet 8: Light/Dark mode setting.
+            SwitchListTile(
+              title: const Text('Dark mode'),
+              subtitle: const Text(
+                'Use the dark Southsea Cinema theme',
+              ),
+              secondary: const Icon(Icons.dark_mode),
+              value: _darkMode,
+              onChanged: _changeDarkMode,
             ),
 
             const SizedBox(height: 20),
 
-            // Save customer profile button.
+            // Existing save customer profile button.
             SizedBox(
               width: double.infinity,
               child: PrimaryButton(
@@ -211,7 +253,7 @@ class _SettingsViewState extends State<SettingsView> {
               ),
             ),
 
-            // Show confirmation after saving.
+            // Display confirmation after saving.
             if (_confirmationMessage.isNotEmpty) ...[
               const SizedBox(height: 12),
               Text(

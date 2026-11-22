@@ -15,6 +15,11 @@ void main() {
 // ValueNotifier updates the app when this value changes.
 final ValueNotifier<bool> biggerTextEnabled = ValueNotifier<bool>(false);
 
+// Worksheet 8: Stores the selected light/dark theme.
+// The cinema starts in dark mode until a saved preference is loaded.
+final ValueNotifier<ThemeMode> cinemaThemeMode =
+    ValueNotifier<ThemeMode>(ThemeMode.dark);
+
 // Increase text size while preserving the device's
 // existing accessibility text scaling.
 class CinemaTextScaler extends TextScaler {
@@ -25,11 +30,10 @@ class CinemaTextScaler extends TextScaler {
 
   @override
   double scale(double fontSize) {
-    // Apply the device's scaling first, then our extra scaling.
+    // Apply device scaling first, then our extra scaling.
     return deviceScaler.scale(fontSize) * multiplier;
   }
 
-  // Work out the font size that produces this scaled value.
   @override
   double get textScaleFactor {
     return scale(1.0);
@@ -48,71 +52,115 @@ class _SouthseaCinemaAppState extends State<SouthseaCinemaApp> {
   void initState() {
     super.initState();
 
-    // Load the saved font-size preference when the app starts.
-    _loadBiggerTextPreference();
+    // Load saved accessibility and theme preferences.
+    _loadPreferences();
   }
 
-  Future<void> _loadBiggerTextPreference() async {
+  Future<void> _loadPreferences() async {
+    // Keep the existing Bigger text preference.
     final SharedPreferences prefs =
         await SharedPreferences.getInstance();
 
-    // False means normal text size for new users.
     biggerTextEnabled.value =
         prefs.getBool('biggerText') ?? false;
+
+    // Worksheet 8: Use SharedPreferencesAsync for theme mode.
+    final SharedPreferencesAsync asyncPrefs =
+        SharedPreferencesAsync();
+
+    final bool savedDarkMode =
+        await asyncPrefs.getBool('darkMode') ?? true;
+
+    // Restore the user's saved light/dark mode.
+    cinemaThemeMode.value =
+        savedDarkMode ? ThemeMode.dark : ThemeMode.light;
   }
 
   @override
   Widget build(BuildContext context) {
-    // Rebuild MaterialApp when Bigger text changes.
-    return ValueListenableBuilder<bool>(
-      valueListenable: biggerTextEnabled,
-      builder: (context, isBiggerText, child) {
-        return MaterialApp(
-          title: appTitle,
-          debugShowCheckedModeBanner: false,
+    // Rebuild when the theme preference changes.
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: cinemaThemeMode,
+      builder: (context, selectedThemeMode, child) {
+        // Rebuild when the Bigger text preference changes.
+        return ValueListenableBuilder<bool>(
+          valueListenable: biggerTextEnabled,
+          builder: (context, isBiggerText, child) {
+            return MaterialApp(
+              title: appTitle,
+              debugShowCheckedModeBanner: false,
 
-          // Keep the existing Southsea Cinema theme.
-          theme: ThemeData.dark().copyWith(
-            scaffoldBackgroundColor: cinemaBackground,
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: cinemaBrand,
-              primary: cinemaBrand,
-              surface: cinemaSurface,
-            ),
+              // Worksheet 8: Switch between light and dark mode.
+              themeMode: selectedThemeMode,
 
-            // Shared app bar theme.
-            appBarTheme: const AppBarTheme(
-              backgroundColor: cinemaSurface,
-              iconTheme: IconThemeData(color: cinemaBrand),
-              titleTextStyle: cinemaHeaderStyle,
-              elevation: 0,
-            ),
-          ),
+              // New light theme.
+              theme: ThemeData.light().copyWith(
+                scaffoldBackgroundColor: const Color(0xFFF5F5F5),
 
-          // Worksheet 8: Apply text scaling across the app.
-          builder: (context, child) {
-            final MediaQueryData mediaQuery = MediaQuery.of(context);
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: cinemaBrand,
+                  brightness: Brightness.light,
+                ),
 
-            // Increase text size by 20% when enabled.
-            final double multiplier = isBiggerText ? 1.2 : 1.0;
-
-            return MediaQuery(
-              data: mediaQuery.copyWith(
-                textScaler: CinemaTextScaler(
-                  mediaQuery.textScaler,
-                  multiplier,
+                appBarTheme: const AppBarTheme(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black87,
+                  iconTheme: IconThemeData(
+                    color: Colors.black87,
+                  ),
+                  elevation: 0,
                 ),
               ),
-              child: child ?? const SizedBox.shrink(),
-            );
-          },
 
-          // Keep all existing navigation routes.
-          initialRoute: '/',
-          routes: {
-            '/': (context) => const HomeView(),
-            '/basket': (context) => const BasketView(),
-            '/settings': (context) => const SettingsView(),
+              // Keep the existing dark cinema theme.
+              darkTheme: ThemeData.dark().copyWith(
+                scaffoldBackgroundColor: cinemaBackground,
+
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: cinemaBrand,
+                  brightness: Brightness.dark,
+                  primary: cinemaBrand,
+                  surface: cinemaSurface,
+                ),
+
+                appBarTheme: const AppBarTheme(
+                  backgroundColor: cinemaSurface,
+                  iconTheme: IconThemeData(
+                    color: cinemaBrand,
+                  ),
+                  titleTextStyle: cinemaHeaderStyle,
+                  elevation: 0,
+                ),
+              ),
+
+              // Worksheet 8: Apply text scaling across the app.
+              builder: (context, child) {
+                final MediaQueryData mediaQuery =
+                    MediaQuery.of(context);
+
+                // Increase text size by 20% when enabled.
+                final double multiplier =
+                    isBiggerText ? 1.2 : 1.0;
+
+                return MediaQuery(
+                  data: mediaQuery.copyWith(
+                    textScaler: CinemaTextScaler(
+                      mediaQuery.textScaler,
+                      multiplier,
+                    ),
+                  ),
+                  child: child ?? const SizedBox.shrink(),
+                );
+              },
+
+              // Preserve all existing navigation routes.
+              initialRoute: '/',
+              routes: {
+                '/': (context) => const HomeView(),
+                '/basket': (context) => const BasketView(),
+                '/settings': (context) => const SettingsView(),
+              },
+            );
           },
         );
       },
