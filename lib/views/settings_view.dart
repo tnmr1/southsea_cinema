@@ -1,5 +1,9 @@
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:southsea_cinema/constants.dart';
+import 'package:southsea_cinema/main.dart';
 import 'package:southsea_cinema/models/user_settings.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/widgets/primary_button.dart';
@@ -21,22 +25,56 @@ class _SettingsViewState extends State<SettingsView> {
   // Newsletter preference
   bool _receiveNewsletter = false;
 
+  // Worksheet 8: Read the current accessibility preference.
+  bool _biggerText = biggerTextEnabled.value;
+
   // Confirmation message
   String _confirmationMessage = '';
 
-  // Initialise the text controllers
   @override
   void initState() {
     super.initState();
 
+    // Create controllers for the profile form.
     _nameController = TextEditingController();
     _addressController = TextEditingController();
     _emailController = TextEditingController();
+
+    // Keep this screen in sync when the saved setting loads.
+    biggerTextEnabled.addListener(_updateBiggerText);
   }
 
-  // Dispose of controllers when the screen closes
+  // Update the switch when the global preference changes.
+  void _updateBiggerText() {
+    if (!mounted) return;
+
+    setState(() {
+      _biggerText = biggerTextEnabled.value;
+    });
+  }
+
+  // Worksheet 8: Change and save the Bigger text preference.
+  Future<void> _changeBiggerText(bool value) async {
+    // Update the switch and all app screens immediately.
+    setState(() {
+      _biggerText = value;
+    });
+
+    biggerTextEnabled.value = value;
+
+    // Store the user's choice on the device.
+    final SharedPreferences prefs =
+        await SharedPreferences.getInstance();
+
+    await prefs.setBool('biggerText', value);
+  }
+
   @override
   void dispose() {
+    // Stop listening when the screen closes.
+    biggerTextEnabled.removeListener(_updateBiggerText);
+
+    // Release the text controllers.
     _nameController.dispose();
     _addressController.dispose();
     _emailController.dispose();
@@ -44,13 +82,13 @@ class _SettingsViewState extends State<SettingsView> {
     super.dispose();
   }
 
-  // Save the customer's profile settings
+  // Save the customer's existing profile settings.
   void _saveSettings() {
     final String name = _nameController.text.trim();
     final String address = _addressController.text.trim();
     final String email = _emailController.text.trim();
 
-    // Create the UserSettings model
+    // Create the customer settings model.
     final UserSettings settings = UserSettings(
       name: name,
       address: address,
@@ -58,7 +96,7 @@ class _SettingsViewState extends State<SettingsView> {
       receiveNewsletter: _receiveNewsletter,
     );
 
-    // Display confirmation
+    // Display a confirmation message.
     setState(() {
       _confirmationMessage = 'Settings saved for ${settings.name}';
     });
@@ -67,21 +105,21 @@ class _SettingsViewState extends State<SettingsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Shared cinema app bar
+      // Shared cinema app bar.
       appBar: AppBar(
         title: const Text(appTitle),
       ),
 
-      // Keep navigation drawer
+      // Keep the existing navigation drawer.
       drawer: const NavDrawer(),
 
-      // Scrollable customer profile form
+      // Scrollable customer settings screen.
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Form heading
+            // Customer profile heading.
             const Text(
               'Customer Profile',
               style: cinemaHeaderStyle,
@@ -89,7 +127,7 @@ class _SettingsViewState extends State<SettingsView> {
 
             const SizedBox(height: 20),
 
-            // Customer full name
+            // Customer full name.
             TextField(
               controller: _nameController,
               decoration: const InputDecoration(
@@ -101,7 +139,7 @@ class _SettingsViewState extends State<SettingsView> {
 
             const SizedBox(height: 16),
 
-            // Customer address
+            // Customer address.
             TextField(
               controller: _addressController,
               maxLines: 3,
@@ -114,7 +152,7 @@ class _SettingsViewState extends State<SettingsView> {
 
             const SizedBox(height: 16),
 
-            // Customer email address
+            // Customer email address.
             TextField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
@@ -127,7 +165,7 @@ class _SettingsViewState extends State<SettingsView> {
 
             const SizedBox(height: 16),
 
-            // Newsletter preference
+            // Existing newsletter preference.
             Row(
               children: [
                 const Expanded(
@@ -146,9 +184,25 @@ class _SettingsViewState extends State<SettingsView> {
               ],
             ),
 
+            const SizedBox(height: 16),
+
+            // Worksheet 8: Accessibility setting.
+            SwitchListTile(
+              title: const Text('Bigger text'),
+              subtitle: const Text(
+                'Increase text size for easier reading',
+              ),
+
+              // Read the current preference.
+              value: _biggerText,
+
+              // Update the whole app and save the choice.
+              onChanged: _changeBiggerText,
+            ),
+
             const SizedBox(height: 20),
 
-            // Save settings button
+            // Save customer profile button.
             SizedBox(
               width: double.infinity,
               child: PrimaryButton(
@@ -157,7 +211,7 @@ class _SettingsViewState extends State<SettingsView> {
               ),
             ),
 
-            // Display confirmation after saving
+            // Show confirmation after saving.
             if (_confirmationMessage.isNotEmpty) ...[
               const SizedBox(height: 12),
               Text(
@@ -174,19 +228,3 @@ class _SettingsViewState extends State<SettingsView> {
     );
   }
 }
-
-// StatefulWidget	Allows form values to change
-// TextEditingController	Reads the text entered by the customer
-// initState()	Creates the controllers
-// dispose()	Releases the controllers
-// TextField	Displays editable input fields
-// Switch	Controls the newsletter preference
-// SingleChildScrollView	Prevents overflow when the keyboard appears
-// UserSettings	Holds the customer profile values
-// _saveSettings()	Reads the form and displays confirmation
-
-// Why do we use initState() and dispose()?
-// Flutter text controllers need to be managed throughout the widget's lifecycle.
-// - initState() creates the controllers when the settings screen first opens.
-// - dispose() releases them when the screen is removed.
-// This is exactly the controller lifecycle described in your Worksheet 5.
