@@ -15,12 +15,14 @@ Reference website: [Southsea Cinema](https://southseacinema.savoysystems.co.uk/S
 ## Features
 
 ### Movie Listings
+
 - Display movies on the home screen.
 - Load movie information asynchronously from a local JSON asset.
 - Show movie details using reusable movie cards.
 - Display loading indicators and error messages when appropriate.
 
 ### Ticket Basket
+
 - Add movie tickets to the basket.
 - Display selected movies and ticket quantities.
 - Calculate individual ticket subtotals.
@@ -29,6 +31,7 @@ Reference website: [Southsea Cinema](https://southseacinema.savoysystems.co.uk/S
 - Complete checkout.
 
 ### SQLite Booking History
+
 - Save completed bookings in a local SQLite database.
 - Generate booking numbers.
 - Store booking summaries, prices and dates.
@@ -36,11 +39,13 @@ Reference website: [Southsea Cinema](https://southseacinema.savoysystems.co.uk/S
 - Clear the current basket after a successful checkout.
 
 ### Customer Settings
+
 - Enter customer name, address and email.
 - Enable or disable newsletter preferences.
 - Display confirmation when customer settings are saved.
 
 ### Accessibility
+
 - Provide a Bigger text switch.
 - Increase app text size by 20% when enabled.
 - Save the font-size preference using `shared_preferences`.
@@ -48,6 +53,7 @@ Reference website: [Southsea Cinema](https://southseacinema.savoysystems.co.uk/S
 - Preserve device accessibility text scaling.
 
 ### Navigation and Styling
+
 - Use named routes to navigate between screens.
 - Provide a shared navigation drawer.
 - Use reusable buttons and widgets.
@@ -57,7 +63,7 @@ Reference website: [Southsea Cinema](https://southseacinema.savoysystems.co.uk/S
 ## Technologies Used
 
 | Technology | Purpose |
-|---|---|
+| --- | --- |
 | Flutter | User interface development |
 | Dart | Application programming |
 | Material Design | Interface components and styling |
@@ -241,7 +247,7 @@ The project separates the user interface, models, repositories and database logi
 The application has been developed through the weekly Flutter coursework worksheets.
 
 | Worksheets | Main Development Areas |
-|---|---|
+| --- | --- |
 | 1–2 | Flutter setup and fundamentals |
 | 3–4 | Dart, widgets and interface development |
 | 5–6 | Customer settings, navigation and testing |
