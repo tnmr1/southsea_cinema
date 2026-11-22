@@ -108,8 +108,7 @@ void main() {
   });
 }
 
-// have we added?
-// Test	Purpose
+// what has been added?           
 // Test 1	Checks the original Movie properties
 // Test 2	Checks ticket price formatting
 // Test 3	Checks JSON conversion in both directions
