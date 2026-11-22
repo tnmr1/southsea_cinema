@@ -1,163 +1,289 @@
-# Southsea Cinema - Flutter Coursework
+# Southsea Cinema — Flutter Coursework
 
-This repository contains the coursework starter project for students enrolled in the **Programming Applications and Programming Languages (M30235)** and **User Experience Design and Implementation (M32605)** modules at the University of Portsmouth.
+A mobile-friendly cinema booking application developed using **Flutter and Dart** for coursework at the **University of Portsmouth**.
 
-## Overview
+This project supports the Programming Applications and Programming Languages (M30235) and User Experience Design and Implementation (M32605) modules.
 
-Your task is to recreate a mobile-friendly version of the Southsea Cinema website using Flutter. You must begin by forking this starter repository, then build your own version of the app step by step as you work through the weekly worksheets.
+## Project Overview
+
+Southsea Cinema is a Flutter application that allows customers to browse movies, select cinema tickets, manage their basket and complete bookings.
+
+The project was developed progressively through the weekly coursework worksheets. It demonstrates Flutter user interface design, Dart programming, navigation, local JSON data, SQLite persistence, accessibility features, automated testing and debugging.
 
 Reference website: [Southsea Cinema](https://southseacinema.savoysystems.co.uk/SouthseaCinema.dll/)
 
-The starter app is deliberately minimal. It contains only a basic theme, an empty home page, a small drawer, and a default widget test. You are expected to add screens, widgets, data models, tests, persistence, and cloud services during the coursework.
+## Features
+
+### Movie Listings
+- Display movies on the home screen.
+- Load movie information asynchronously from a local JSON asset.
+- Show movie details using reusable movie cards.
+- Display loading indicators and error messages when appropriate.
+
+### Ticket Basket
+- Add movie tickets to the basket.
+- Display selected movies and ticket quantities.
+- Calculate individual ticket subtotals.
+- Calculate the total ticket quantity and booking price.
+- Remove tickets from the basket.
+- Complete checkout.
+
+### SQLite Booking History
+- Save completed bookings in a local SQLite database.
+- Generate booking numbers.
+- Store booking summaries, prices and dates.
+- Display previous bookings in the Basket screen.
+- Clear the current basket after a successful checkout.
+
+### Customer Settings
+- Enter customer name, address and email.
+- Enable or disable newsletter preferences.
+- Display confirmation when customer settings are saved.
+
+### Accessibility
+- Provide a Bigger text switch.
+- Increase app text size by 20% when enabled.
+- Save the font-size preference using `shared_preferences`.
+- Restore the preference when reopening the application.
+- Preserve device accessibility text scaling.
+
+### Navigation and Styling
+- Use named routes to navigate between screens.
+- Provide a shared navigation drawer.
+- Use reusable buttons and widgets.
+- Maintain a consistent cinema-themed interface.
+- Support scrollable layouts.
+
+## Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| Flutter | User interface development |
+| Dart | Application programming |
+| Material Design | Interface components and styling |
+| JSON | Local movie data |
+| SQLite / sqflite | Booking persistence |
+| shared_preferences | Saving accessibility preferences |
+| flutter_test | Automated widget testing |
+| Git and GitHub | Version control |
 
 ## Getting Started
 
 ### Prerequisites
 
-You need:
+Before running the application, install:
 
-- A GitHub account
-- A way to edit and run Flutter projects
-- Git installed and connected to your GitHub account
+- Flutter SDK
+- Dart SDK
+- Visual Studio Code with Flutter and Dart extensions
+- Google Chrome
+- Git
 
-Follow the [development environment instructions in Worksheet 1](https://manighahrmani.github.io/sandwich_shop/worksheet-1.html#set-up-your-development-environment). You can use your own device or access the university machines remotely.
-
-### Fork the Repository
-
-Open this repository on GitHub and click **Fork**, as shown below:
-
-[https://github.com/manighahrmani/southsea_cinema/fork](https://github.com/manighahrmani/southsea_cinema/fork)
-
-![Clicking the Fork button on GitHub](images/step1_fork_button.png)
-
-On the "Create a new fork" page, leave the default options as they are (do not change the repository name) and click **Create fork**:
-
-![Creating a new fork on GitHub](images/step1_create_fork.png)
-
-Your fork should be called `southsea_cinema` and should have a URL like this:
-
-```text
-https://github.com/YOUR-USERNAME/southsea_cinema
-```
-
-### Clone Your Forked Repository
-
-On your forked repository page, click the green **Code** button and copy the HTTPS URL, as shown below:
-
-![Copying the clone URL from GitHub](images/step2_clone_repository.png)
-
-If you are using VS Code, open the Source Control panel and click **Clone Repository** (or open the Command Palette with `Ctrl+Shift+P` / `Cmd+Shift+P` and choose "Git: Clone"), then paste the URL you copied:
-
-![Cloning your fork in VS Code](images/step2_open_in_vscode.png)
-
-Alternatively, if you are using a terminal, run:
+### Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/southsea_cinema.git
+git clone https://github.com/tnmr1/southsea_cinema.git
 cd southsea_cinema
 ```
 
-Replace `YOUR-USERNAME` with your GitHub username.
-
 ### Install Dependencies
 
-When you open the project, VS Code may show a popup asking if you want to fetch missing packages. If you see it, click **Run 'pub get'**, as shown below:
-
-![VS Code prompting to run pub get](images/step3_flutter_pub_get_better.png)
-
-If you do not see this popup, open a terminal and run the command manually:
+Run:
 
 ```bash
 flutter pub get
 ```
 
-This downloads the Flutter packages needed by the starter app.
-
-![Running flutter pub get in the terminal](images/step3_flutter_pub_get.png)
+This installs the packages listed in `pubspec.yaml`.
 
 ### Run the Application
 
-This coursework targets Flutter Web. Use Chrome or Edge.
+To run the project in Chrome:
 
 ```bash
 flutter run -d chrome
 ```
 
-or:
+The application will launch in a browser.
+
+## How to Use the App
+
+1. Open the Southsea Cinema application.
+2. Browse the available movies on the Home screen.
+3. Select a movie and add tickets to your basket.
+4. Open **My Basket** to review your selected tickets.
+5. Check the ticket quantities and calculated prices.
+6. Select **Checkout** to complete a booking.
+7. View your previous bookings under **Past Bookings**.
+8. Open **Settings** to enter customer details or enable Bigger text.
+
+## Testing
+
+The application uses automated Flutter tests to check important functionality.
+
+### Run All Tests
 
 ```bash
-flutter run -d edge
+flutter test
 ```
 
-The app should open in your browser and show the Southsea Cinema starter home page, as shown below:
-
-![Starter app running in Chrome](images/step4_run_app.png)
-
-### Use Mobile View
-
-The coursework should be designed mobile-first.
-
-To view it in mobile view in Chrome or Edge, open developer tools (right-click the page and choose **Inspect**, or press F12), then click the **Toggle device toolbar** button:
-
-![Toggle device toolbar button in Chrome DevTools](images/step5_open_devtools.png)
-
-Finally, choose a phone-sized device preset from the dropdown menu:
-
-![Selecting a phone-sized device preset](images/step5_mobile_view.png)
-
-## Marking Criteria
-
-This repository is the starting point for your Southsea Cinema coursework, which is Item 1 of your module and worth 50% of the overall module mark. Item 1 is assessed as a portfolio of five live in-person demos during your timetabled practical session. You build the app progressively by completing the exercises at the end of the weekly worksheets.
-
-Every two worksheets prepare you for one demo (for example, Worksheets 1 and 2 prepare you for Demo 1). Only your best four demo marks count towards Item 1, with each counted demo worth 25% of Item 1 (12.5% of the overall module mark). Each demo is marked on functionality (9%), code quality (8%), and your understanding through two questions about your own code (8%).
-
-Assessment takes place across five two-week demo windows (Weeks 1 and 2, Weeks 3 and 4, Weeks 5 and 6, Weeks 7 and 8, and Weeks 9 and 10). Three rules apply:
-
-- You can perform at most one demo in any demo window.
-- Demos must be completed in order. You cannot skip ahead to a later demo if you have missed an earlier one, because each stage builds on the previous codebase.
-- Missing one demo window carries no mark penalty because only your best four demo marks count. Missing two or more windows reduces the number of demos you can complete.
-
-For the full mark breakdown, the missed-demo rules, and how Extenuating Circumstances affect Item 1, read the [Assessment Guide](https://portdotacdotuk-my.sharepoint.com/:w:/g/personal/mani_ghahremani_port_ac_uk/IQC9nZoNwb2jT40MnFQPZWVvAVdTK2PGBmZ8jPff30RRyPc). The full demo dates and requirements are listed on the [Flutter Course homepage](https://manighahrmani.github.io/sandwich_shop/).
-
-## Submission
-
-You will submit the link to your public forked repository on Moodle before the first demo. You are not submitting a zip file or a copy of the source code.
-
-Make sure your repository is public. Test this by opening your repository link in a private/incognito browser window.
-
-## Demonstration
-
-During each demo, you must be able to run your app and answer questions about your code.
-
-Before attending a demo, check that the app runs from a clean clone:
+### Run the Settings Tests
 
 ```bash
-flutter pub get
-flutter run -d chrome
+flutter test test/settings_view_test.dart
 ```
+
+### Run the Basket Tests
+
+```bash
+flutter test test/basket_view_test.dart
+```
+
+### Run the Database Tests
+
+```bash
+flutter test test/database/cinema_db_test.dart
+```
+
+### Run Static Analysis
+
+```bash
+dart analyze
+```
+
+Static analysis checks the Dart project for potential programming problems and warnings.
+
+### Testing Areas
+
+Tests cover functionality including:
+
+- Widget rendering
+- Customer settings
+- Newsletter preference
+- Bigger text switch
+- Basket functionality
+- Booking checkout
+- SQLite database operations
+- Booking history
+
+## Debugging
+
+Flutter's debugging tools were used to investigate and correct problems during development.
+
+### Breakpoints
+
+A breakpoint was placed inside `basket_view.dart` to investigate a deliberately incorrect ticket subtotal.
+
+The debugger was used to pause execution and inspect the calculated value.
+
+For example:
+
+- Correct subtotal: £15.00
+- Deliberately incorrect subtotal: £16.00
+- Cause: An additional £1 was added during the calculation.
+
+The calculation was corrected after identifying the problem.
+
+### Flutter Widget Inspector
+
+Flutter DevTools and Widget Inspector were used to examine the interface's widget tree and investigate layouts.
+
+Important widgets include:
+
+- `Scaffold`
+- `ListView`
+- `Card`
+- `Column`
+- `Text`
+- `SwitchListTile`
+
+These tools help identify widget relationships and potential layout problems.
 
 ## Project Structure
-
-The starter repository is intentionally small:
 
 ```text
 southsea_cinema/
 ├── lib/
-│   ├── constants.dart          # Shared colours, text styles, and app title
-│   ├── main.dart               # Main app and route setup
+│   ├── main.dart
+│   ├── constants.dart
+│   ├── database/
+│   │   └── cinema_db.dart
+│   ├── models/
+│   │   ├── movie.dart
+│   │   ├── basket_item.dart
+│   │   ├── booking.dart
+│   │   └── user_settings.dart
+│   ├── repositories/
+│   │   ├── movie_repository.dart
+│   │   └── basket_repository.dart
 │   ├── views/
-│   │   ├── home_view.dart      # Starter home page
-│   │   └── movie_listing.dart  # Empty movie listing page
+│   │   ├── home_view.dart
+│   │   ├── basket_view.dart
+│   │   └── settings_view.dart
 │   └── widgets/
-│       └── nav_drawer.dart     # Minimal starter drawer
+│       ├── nav_drawer.dart
+│       ├── movie_card.dart
+│       └── primary_button.dart
 ├── test/
-│   └── widget_test.dart        # Basic widget test
-├── pubspec.yaml                # Project dependencies
-└── README.md                   # This file
+│   ├── widget_test.dart
+│   ├── settings_view_test.dart
+│   ├── basket_view_test.dart
+│   └── database/
+│       └── cinema_db_test.dart
+├── pubspec.yaml
+└── README.md
 ```
 
-You will add more files and folders as the coursework develops.
+The project separates the user interface, models, repositories and database logic to improve organisation and maintainability.
 
-## Help with Coursework
+## Coursework Development
 
-If you have questions or encounter issues while working on this coursework, use the [Discord guide](https://portdotacdotuk-my.sharepoint.com/:p:/g/personal/mani_ghahremani_port_ac_uk/IQCMJP6IiR_bQoYUMdXJSRDYAWnajEALZYEXFZyrJkHS1QU) to find the dedicated Discord channel and ask for help. Before posting a new question, check the existing posts to see if your question has already been answered. You can also attend your timetabled practical sessions to get face-to-face support from teaching staff.
+The application has been developed through the weekly Flutter coursework worksheets.
+
+| Worksheets | Main Development Areas |
+|---|---|
+| 1–2 | Flutter setup and fundamentals |
+| 3–4 | Dart, widgets and interface development |
+| 5–6 | Customer settings, navigation and testing |
+| 7 | SQLite booking history and widget tests |
+| 8 | Accessibility, debugging, testing and documentation |
+
+## Assessment and Demonstrations
+
+This project forms part of the University of Portsmouth coursework.
+
+The original assessment uses five live demonstration opportunities, with the best four demo marks counting towards Item 1.
+
+During demonstrations, students may be asked to:
+
+- Run the application.
+- Demonstrate implemented functionality.
+- Explain important Flutter and Dart concepts.
+- Discuss their own code.
+- Demonstrate testing and debugging.
+
+Refer to the official Moodle module materials and assessment guide for the full marking criteria, demo dates and submission requirements.
+
+## Submission
+
+The coursework is maintained in a public GitHub repository.
+
+Repository: [Southsea Cinema on GitHub](https://github.com/tnmr1/southsea_cinema)
+
+The repository contains the Flutter source code, automated tests and project documentation.
+
+## Further Development
+
+Possible future improvements include:
+
+- Additional accessibility options.
+- More detailed booking information.
+- Improved test coverage.
+- Enhanced booking management.
+- Further database relationships.
+
+## Author
+
+University of Portsmouth Flutter coursework project.
+
+Developed using Flutter, Dart and GitHub.
