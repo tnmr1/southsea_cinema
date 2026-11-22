@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/database/cinema_db.dart';
@@ -232,14 +233,17 @@ class _BasketViewState extends State<BasketView> {
 
                       const SizedBox(height: 8),
 
-                      // Total price for this movie.
-                      Text(
-                        '£${items[index].lineTotal.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                      ),
+                      // ORIGINAL CODE: Commented out for Worksheet 8.
+                      // Text(
+                      //   '£${items[index].lineTotal.toStringAsFixed(2)}',
+                      //   style: const TextStyle(
+                      //     fontWeight: FontWeight.bold,
+                      //     color: Colors.black87,
+                      //   ),
+                      // ),
+
+                      // Worksheet 8: Display the temporary incorrect subtotal.
+                      finalPriceText(items[index]),
 
                       const SizedBox(height: 12),
 
@@ -368,6 +372,25 @@ class _BasketViewState extends State<BasketView> {
                 ),
           ],
         ),
+      ),
+    );
+  }
+
+  // Worksheet 8: Temporary method for the breakpoint exercise.
+  Widget finalPriceText(BasketItem item) {
+    // Correct subtotal for the selected movie tickets.
+    final double correctTotal = item.lineTotal;
+
+  // Worksheet 8: Fixed the incorrect £1 calculation.
+// The displayed subtotal now matches the actual price.
+final double displayedTotal = correctTotal;
+
+    // Display the incorrect subtotal for debugging.
+    return Text(
+      '£${displayedTotal.toStringAsFixed(2)}',
+      style: const TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Colors.black87,
       ),
     );
   }
