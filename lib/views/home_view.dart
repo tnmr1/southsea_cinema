@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
@@ -66,6 +67,9 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    // Get colours that adapt to light and dark mode
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       // Uses shared AppBarTheme from main.dart
       appBar: AppBar(
@@ -84,8 +88,8 @@ class _HomeViewState extends State<HomeView> {
               ? Center(
                   child: Text(
                     _errorMessage,
-                    style: const TextStyle(
-                      color: cinemaFontWhite,
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
                     ),
                   ),
                 )
@@ -102,16 +106,15 @@ class _HomeViewState extends State<HomeView> {
   }
 }
 
-// the changes
-// Component	What it does
-// StatefulWidget	Allows the home page to update after loading
-// _movies	Stores movies loaded from JSON
-// _loading	Tracks whether loading is in progress
-// _errorMessage	Stores an error if loading fails
-// initState()	Starts loading when the screen opens
-// Future<void>	Represents the asynchronous loading operation
-// await	Waits for the JSON asset to load
-// mounted	Checks that the widget still exists before updating
-// setState()	Rebuilds the screen with loaded movies
-// CircularProgressIndicator	Displays a loading indicator
-// ListView.builder	Displays the loaded movie cards
+// Component summary:
+// StatefulWidget - Allows the home page to update after loading
+// _movies - Stores movies loaded from JSON
+// _loading - Tracks whether loading is in progress
+// _errorMessage - Stores an error if loading fails
+// initState() - Starts loading when the screen opens
+// Future<void> - Represents asynchronous loading
+// await - Waits for the JSON asset to load
+// mounted - Checks that the widget still exists
+// setState() - Rebuilds the screen with loaded movies
+// CircularProgressIndicator - Displays a loading indicator
+// ListView.builder - Displays the loaded movie cards

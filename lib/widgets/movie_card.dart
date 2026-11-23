@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/views/movie_listing.dart';
@@ -16,6 +17,9 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Theme-aware colours for light and dark modes
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return Card(
       margin: const EdgeInsets.symmetric(
         horizontal: 16,
@@ -48,27 +52,38 @@ class MovieCard extends StatelessWidget {
                       // Movie title
                       Text(
                         movie.title,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
+                          color: colorScheme.onSurface,
                         ),
                       ),
 
                       const SizedBox(height: 8),
 
                       // Movie age rating
-                      Text(movie.ageRating),
+                      Text(
+                        movie.ageRating,
+                        style: TextStyle(
+                          color: colorScheme.onSurface,
+                        ),
+                      ),
 
                       // Movie description
                       Text(
                         movie.synopsis,
-                        style: const TextStyle(
-                          color: Colors.black54,
+                        style: TextStyle(
+                          color: colorScheme.onSurfaceVariant,
                         ),
                       ),
 
                       // Movie screening time
-                      Text(movie.screeningTime),
+                      Text(
+                        movie.screeningTime,
+                        style: TextStyle(
+                          color: colorScheme.onSurface,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -84,15 +99,14 @@ class MovieCard extends StatelessWidget {
               children: [
                 Text(
                   '£${movie.ticketPrice.toStringAsFixed(2)}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
+                    color: colorScheme.onSurface,
                   ),
                 ),
 
                 // Opens booking page for selected movie
-
-// Opens booking page for selected movie
                 PrimaryButton(
                   label: 'BOOK NOW',
                   onPressed: () {
@@ -115,27 +129,17 @@ class MovieCard extends StatelessWidget {
   }
 }
 
-// StatelessWidget	The card displays the movie passed to it
-// final Movie movie	Stores the Movie object for this card
-// required this.movie	A Movie must be supplied when creating the card
-// build (BuildContext context)	Describes the widget's interface
-// Card	Provides the card's Material surface
-// Column	Arranges the card's contents vertically
-// children: []	An empty list that we'll fill with movie details
-
-// Card	Displays information inside a card
-// Padding	Creates space inside the card
-// Row	Arranges the poster and text horizontally
-// Image.asset	Loads the movie poster
-// BoxFit.cover	Fills the image area without distorting the image
-// SizedBox(width: 16)	Adds a gap between the poster and text
-// Expanded	Prevents text from overflowing horizontally
-// Column	Places the movie details vertically
-// movie.title	Gets the title from the Movie object
-
-// What changed?
-// Before	After
-// ElevatedButton	PrimaryButton
-// child: const Text('BOOK NOW')	label: 'BOOK NOW'
-// Default rounded corners	Square corners
-// Navigation to MovieListing	Navigation remains unchanged
+// Component summary:
+// StatelessWidget - Displays the movie passed to it
+// final Movie movie - Stores the movie data
+// required this.movie - Requires a movie when creating the card
+// Card - Displays movie information
+// Padding - Adds spacing inside the card
+// Row - Arranges the poster and text horizontally
+// Column - Arranges movie details vertically
+// Image.asset - Loads the movie poster
+// Expanded - Prevents text overflow
+// ColorScheme - Provides theme-aware text colours
+// onSurface - Readable text on the card surface
+// onSurfaceVariant - Softer colour for the movie description
+// PrimaryButton - Opens the booking page
